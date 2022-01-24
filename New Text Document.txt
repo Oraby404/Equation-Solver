@@ -1,0 +1,6 @@
+3
+Gaussian-jordan
+a+b+c
+5a+66b+2c
+6a-2d+4v
+5 3 8.2

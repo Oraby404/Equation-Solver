@@ -3,17 +3,16 @@ import numpy
 
 class Methods:
 
-    def __init__(self, n, es, max_iterations):
-        self.order = n - 1  # starts from  0
+    def __init__(self, n, es, max_iterations, A, X=None):
 
         # A , B and X are from the text file
+        self.order = n - 1  # starts from  0
+        #ARRAY OF EQUATIONS PARSE IT TO GET A B ARRAYS
+        self.A=A
+        self.B=B
+        #ARRAY OF INIT
+        self.X=X
 
-        # self.A = numpy.zeros((n, n))
-        self.A = numpy.array([[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]], dtype='float64')
-        # self.B = numpy.zeros((n, 1))
-        self.B = numpy.array([[7.85], [-19.3], [71.4]], dtype='float64')
-        # initial values for gauss seidel
-        self.X = numpy.zeros(n, dtype='float64')
 
         self.equations_matrix = numpy.concatenate((self.A, self.B), axis=1)
         self.solutions = numpy.zeros(n)
@@ -34,7 +33,7 @@ class Methods:
                 for j in range(k + 1, self.order + 2):
                     # start with j = 0 in case you want to get an upper triangular matrix
                     self.equations_matrix[i, j] = self.equations_matrix[i, j] - (
-                                mul_factor * self.equations_matrix[k, j])
+                            mul_factor * self.equations_matrix[k, j])
 
         # backward elimination
         n = self.order
@@ -80,6 +79,7 @@ class Methods:
 
     ###############################################################################
 
+    # it
     def gauss_jordan(self):
         # forward elimination
         # for every unknown ( a , b ,c ...) plus B
@@ -118,10 +118,11 @@ class Methods:
     ###############################################################################
 
 
-my_method = Methods(3, 0.001, 10)
-
-# my_method.gauss_elimination()
-# print(my_method.solutions)
+#A = numpy.array([[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]], dtype='float64')
+#B = numpy.array([[7.85], [-19.3], [71.4]], dtype='float64')
+#my_method = Methods(3, 0.001, 10, A, B)
+#my_method.gauss_elimination()
+#print(my_method.solutions)
 
 # my_method.lu_decomposition()
 # print(my_method.solutions)
@@ -129,5 +130,5 @@ my_method = Methods(3, 0.001, 10)
 # my_method.gauss_jordan()
 # print(my_method.solutions)
 
-my_method.gauss_seidel()
-print(my_method.X)
+# my_method.gauss_seidel()
+# print(my_method.X)
