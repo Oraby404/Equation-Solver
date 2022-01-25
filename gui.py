@@ -19,7 +19,7 @@ class UI(QMainWindow):
         self.percision = self.findChild(QTextEdit, "percision")
         self.it = self.findChild(QTextEdit, "iterations")
         self.init = self.findChild(QTextEdit, "init_values")
-        self.answer=self.findChild(QTextEdit, "answer")
+        self.answer=self.findChild(QLabel, "answer")
 
         self.eq1 = self.findChild(QLineEdit, "eq1")
         self.eq2 = self.findChild(QLineEdit, "eq2")
@@ -62,7 +62,7 @@ class UI(QMainWindow):
                 QLineEdit(self.qle_list[i].setText(file1.readline()))
 
             m = str(self.method.currentText())
-            if m == "Gaussian-jordan" or m == "Gauss-seidel":
+            if m == "Gauss-seidel":
                 QTextEdit(self.init.setText(file1.readline().rstrip()))
 
     def clicker1(self):
@@ -79,46 +79,46 @@ class UI(QMainWindow):
 
         m = str(self.method.currentText())
         init = str(self.init.toPlainText())
-        if m == "Gaussian-jordan" or m == "Gauss-seidel":
+        if m == "Gauss-seidel":
             for i in init.split(sep=' '):
                 X.append(float(i))
 
         es=float(self.percision.toPlainText())
         max_iterations=int(self.it.toPlainText())
-        print("Array of equations : ")
-        print(A)
-        print("Array of init_vals : ")
-        print(X)
-        print("NU_OF_EQ : ")
-        print(n)
-        print("method : ")
-        print(m)
-        print("Percision : ")
-        print(es)
-        print("Max It : ")
-        print(max_iterations)
-        if m == "gauss elimination":
-            pass
-            # my_method = Methods(n,es,max_iterations,A)
-            # my_method.gauss_elimination()
+        #print("Array of equations : ")
+        #print(A)
+        #print("Array of init_vals : ")
+        #print(X)
+        #print("NU_OF_EQ : ")
+        #print(n)
+        #print("method : ")
+        #print(m)
+        #print("Percision : ")
+        #print(es)
+        #print("Max It : ")
+        #print(max_iterations)
+        if m == "Gauss-elimination":
+            my_method = Methods(n,es,max_iterations,A)
+            my_method.gauss_elimination()
+            print(my_method.solutions)
 
-        elif m == "lu decomposition":
-            pass
-            # my_method = Methods(n,es,max_iterations,A)
-            # my_method.lu_decomposition()
-        elif m == "gauss jordan":
-            pass
-            # my_method = Methods(n,es,max_iterations,A,X=X)
-            # my_method.gauss_jordan()
+        elif m == "Lu-decomposition":
+            my_method = Methods(n,es,max_iterations,A)
+            my_method.lu_decomposition()
+            print(my_method.solutions)
+        elif m == "Gauss-jordan":
+            my_method = Methods(n,es,max_iterations,A,X)
+            my_method.gauss_jordan()
 
-        elif m == "gauss seidel":
-            pass
-            # my_method = Methods(n,es,max_iterations,A,X=X)
-            # my_method.gauss_seidel()
+        elif m == "Gauss-seidel":
+            my_method = Methods(n,es,max_iterations,A,X)
+            my_method.gauss_seidel()
 
-        QLabel.setText()
-        self.answer.setText(my_method.solutions)
+        QLabel(self.answer.setText(str(my_method.solutions)))
 
 app = QApplication(sys.argv)
 UIWindow = UI()
 app.exec_()
+#3x+2y+1z-6b
+#2x+3y+0z-7b
+#0x+0y+2z-4b

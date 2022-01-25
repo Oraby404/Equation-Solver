@@ -433,16 +433,6 @@ p, li { white-space: pre-wrap; }
      <string/>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>321</y>
-      <width>381</width>
-      <height>241</height>
-     </rect>
-    </property>
-   </widget>
   </widget>
  </widget>
  <resources/>
