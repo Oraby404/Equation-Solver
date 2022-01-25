@@ -11,24 +11,19 @@ class Methods:
         for i in range(len(str)):
             mylist[i] = re.split("[xyzb]", str[i])
 
-        newList = [0] * (len(mylist))
-        for l in range(len(mylist)):
-            newList[l] = float(mylist[l][3])
         # ---------------------------added----------------------------
+
         A = numpy.array(mylist)
         A = numpy.delete(A, -1, axis=1)
         for iy, ix in numpy.ndindex(A.shape):
             A[iy][ix] = eval(A[iy, ix])
-
         A = numpy.asarray(A, dtype=numpy.float64, order='C')
 
-        B = numpy.array(newList)
+        B = A[:, -1]
         B = B[numpy.newaxis].T
 
-        self.A=A
-        self.B=B
-
-
+        self.A = A
+        self.B = B
 
         # A , B and X are from the text file
         self.order = n - 1  # starts from  0
@@ -151,14 +146,16 @@ class Methods:
 
     ###############################################################################
 
-#str = ["3x+2y+1z-6b", "2x+3y+0z-7b", "0x+0y+2z-4b"]
-#str = ['a+b+c', '5a+66b+2c', '6a-2d+4v']
-#my_method = Methods(3, 0.001, 10, str)
-#my_method.A = A
-#my_method.B = B
 
-#my_method.gauss_elimination()
-#print(my_method.solutions)
+# str = ["3x+2y+1z-6b", "2x+3y+0z-7b", "0x+0y+2z-4b"]
+str = ["2x+1y+4z+1b", "1x+2y+3z+1.5b", "4x-1y+2z+2b"]
+# str = ['a+b+c', '5a+66b+2c', '6a-2d+4v']
+my_method = Methods(3, 0.001, 10, str)
+# my_method.A = A
+# my_method.B = B
+
+my_method.gauss_elimination()
+print(my_method.solutions)
 
 # my_method.lu_decomposition()
 # print(my_method.solutions)
