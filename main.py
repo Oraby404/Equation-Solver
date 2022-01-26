@@ -4,7 +4,7 @@ import re
 
 class Methods:
 
-    def __init__(self, n, es, max_iterations, str, X=None):
+    def __init__(self, n, es, max_iterations, str, X=[]):
 
         mylist = [0] * (len(str))
 
@@ -21,6 +21,7 @@ class Methods:
 
         B = A[:, -1]
         B = B[numpy.newaxis].T
+        A = numpy.delete(A, -1, axis=1)
 
         self.A = A
         self.B = B
@@ -28,8 +29,22 @@ class Methods:
         # A , B and X are from the text file
         self.order = n - 1  # starts from  0
         # ARRAY OF EQUATIONS PARSE IT TO GET A B ARRAYS
+
         # ARRAY OF INIT
         self.X = X
+
+        print("Array A")
+        print(self.A)
+        print("Array B")
+        print(self.B)
+        print("----------------------------------------")
+        print(self.X)
+        print("----------------------------------------")
+        print(n)
+        print("Percision : ")
+        print(es)
+        print("Max It : ")
+        print(max_iterations)
 
         self.equations_matrix = numpy.concatenate((self.A, self.B), axis=1)
         self.solutions = numpy.zeros(n)
@@ -147,15 +162,26 @@ class Methods:
     ###############################################################################
 
 
-# str = ["3x+2y+1z-6b", "2x+3y+0z-7b", "0x+0y+2z-4b"]
-str = ["2x+1y+4z+1b", "1x+2y+3z+1.5b", "4x-1y+2z+2b"]
-# str = ['a+b+c', '5a+66b+2c', '6a-2d+4v']
-my_method = Methods(3, 0.001, 10, str)
+# str=["1x+1y-1z-4b","1x-2y+3z+6b","2x+3y+1z-7b"]
+# str = ["2x+1y+4z+1b", "1x+2y+3z+1.5b", "4x-1y+2z+2b"]
+
+# str = ["1x+1y+2z+8b", "-1x-2y+3z+1b", "3x+7y+4z+10b"]
+# str = ["2x+3y+1z-4b", "4x+1y+4z+9b", "3x+4y+6z+0b"]
+
+# str = ["2x+1y+4z+1b", "1x+2y+3z+1.5b", "4x-1y+2z+2b"]
+# str = ["2x+1y+4z+1b", "1x+2y+3z+1.5b", "4x-1y+2z+2b"]
+
+# str = ["2x+1y+4z+1b", "1x+2y+3z+1.5b", "4x-1y+2z+2b"]
+#str = ["4x-1y+1z+4b", "1x+6y+2z+9b", "-1x-2y+5z+2b"]
+
+#X=[1.0,1.0,1.0]
+#print(type(X))
+#my_method = Methods(3, 0.001, 1, str,X)
 # my_method.A = A
 # my_method.B = B
 
-my_method.gauss_elimination()
-print(my_method.solutions)
+# my_method.gauss_elimination()
+# print(my_method.solutions)
 
 # my_method.lu_decomposition()
 # print(my_method.solutions)
@@ -163,6 +189,5 @@ print(my_method.solutions)
 
 # my_method.gauss_jordan()
 # print(my_method.solutions)
-
-# my_method.gauss_seidel()
-# print(my_method.X)
+#my_method.gauss_seidel()
+#print(my_method.X)
