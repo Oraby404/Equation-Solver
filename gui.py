@@ -98,9 +98,8 @@ class UI(QMainWindow):
             my_method = Methods(n, es, max_iterations, A)
             my_method.lu_decomposition()
         elif m == "Gaussian-jordan":
-            pass
-            #my_method = Methods(n, es, max_iterations, A)
-            #my_method.gauss_jordan()
+            my_method = Methods(n, es, max_iterations, A)
+            my_method.gauss_jordan()
         elif m == "Gauss-seidel":
             my_method = Methods(n, es, max_iterations, A,X=X)
             my_method.gauss_seidel()
